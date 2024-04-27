@@ -85,7 +85,7 @@ function confirm() {
 const getApi = "https://dahua.metcfire.com.tw/api/CRUDTest/a"; //查詢  get
 const addApi = "https://dahua.metcfire.com.tw/api/CRUDTest"; // post 新增
 const fixApi = "https://dahua.metcfire.com.tw/api/CRUDTest"; //patch
-const deleteApi = "https://dahua.metcfire.com.tw/api/CRUDTestt/"; // 後面要 {id} //刪除  delete
+const deleteApi = "https://dahua.metcfire.com.tw/api/CRUDTest/"; // 後面要 {id} //刪除  delete
 
 
 
