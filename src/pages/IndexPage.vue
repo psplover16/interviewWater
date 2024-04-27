@@ -68,17 +68,34 @@ const $q = useQuasar();
 
 
 
-function confirm() {
+async function confirm(OKFUNC: any, NNFunc: any) {
   $q.dialog({
-    dark: true,
-    title: 'Alert',
-    message: 'Some message'
-  }).onOk(() => {
-    // console.log('OK')
+    title: '提示',
+    message: '是否確定刪除該筆資料?',
+    cancel: {
+      label: "取消",
+      flat: true,
+      textColor: "brown-5",
+      color: "white",
+    },
+    ok: {
+      label: "確定",
+      flat: true,
+      textColor: "brown-5",
+      color: "white",
+    },
+    focus:"ok",
+    persistent: true
+  }).onOk(async () => {
+    console.log('>>>> OK')
+    await OKFUNC();
+    await NNFunc();
+  }).onOk(async () => {
+    console.log('>>>> second OK catcher')
   }).onCancel(() => {
-    // console.log('Cancel')
+    console.log('>>>> Cancel')
   }).onDismiss(() => {
-    // console.log('I am triggered on both OK and Cancel')
+    console.log('I am triggered on both OK and Cancel')
   })
 }
 
@@ -145,9 +162,14 @@ async function handleClickOption(btn, data) {
     tempData.value.age = "";
   } else {
     // confirm();
-    console.log(deleteApi+data.id);
-    const data2 = await axiosdata(`${deleteApi}${data.id}`, "delete", "")
-    const data3 = await getAlldata();
+    // console.log(deleteApi+data.id);
+    // const data2 = await axiosdata(`${deleteApi}${data.id}`, "delete", "")
+    // 
+    confirm(
+      () => axiosdata(`${deleteApi}${data.id}`, "delete", ""),
+      () => getAlldata()
+    );
+    // const data3 = await getAlldata();
   }
 }
 
